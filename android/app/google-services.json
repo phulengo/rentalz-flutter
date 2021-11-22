@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "224840100520",
+    "project_id": "rentalz-flutter",
+    "storage_bucket": "rentalz-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224840100520:android:a3d9268182320166b9f09d",
+        "android_client_info": {
+          "package_name": "com.phulengo.rentalz_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224840100520-1f9866hag9tulstgu85fbkgn53mh9haj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phulengo.rentalz_flutter",
+            "certificate_hash": "c6be1fbf61b777604f4947903c73c78f60d2d48e"
+          }
+        },
+        {
+          "client_id": "224840100520-re1b45r0sbdl9fr7dqf0dt7jrquipv5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs5lQx9z3KgtiPmVHwNrCMvqWLaYArWIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224840100520-re1b45r0sbdl9fr7dqf0dt7jrquipv5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

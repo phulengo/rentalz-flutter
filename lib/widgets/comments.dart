@@ -164,48 +164,49 @@ class _CommentsState extends State<Comments> {
                               children: [
                                 Container(
                                   padding:
-                                      const EdgeInsets.fromLTRB(24, 16, 24, 16),
+                                      const EdgeInsets.fromLTRB(16, 16, 16, 16),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.shade300,
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(4.0))),
-                                  child: Row(children: [
-                                    FutureBuilder(
-                                        future: db.getUserDataFromId(userId),
-                                        builder: (BuildContext context,
-                                            AsyncSnapshot snapshot) {
-                                          if (snapshot.hasData) {
-                                            var userData = snapshot.data;
-                                            return Row(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 24,
-                                                  backgroundImage: NetworkImage(
-                                                      userData['photoURL']),
-                                                ),
-                                                const SizedBox(width: 8),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      userData['displayName'],
-                                                      style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                    ),
-                                                    Text(comments[index]
-                                                        ['content'])
-                                                  ],
-                                                )
-                                              ],
-                                            );
-                                          } else {
-                                            return const CircularProgressIndicator
-                                                .adaptive();
-                                          }
-                                        }),
-                                  ]),
+                                  child: FutureBuilder(
+                                      future: db.getUserDataFromId(userId),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot snapshot) {
+                                        if (snapshot.hasData) {
+                                          var userData = snapshot.data;
+                                          return Row(
+                                            children: [
+                                              CircleAvatar(
+                                                radius: 24,
+                                                backgroundImage: NetworkImage(
+                                                    userData['photoURL']),
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    userData['displayName'],
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 250,
+                                                    child: Text(comments[index]
+                                                        ['content']),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          );
+                                        } else {
+                                          return const CircularProgressIndicator
+                                              .adaptive();
+                                        }
+                                      }),
                                 ),
                               ],
                             ));

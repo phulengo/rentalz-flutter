@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rentalz_flutter/screens/property/my_properties.dart';
 import 'package:rentalz_flutter/services/auth.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -30,6 +32,58 @@ class _ProfilePageState extends State<ProfilePage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      border:
+                          Border.all(width: 1, color: Colors.grey.shade300)),
+                  child: IconButton(
+                      onPressed: () {
+                        FlutterRingtonePlayer.play(
+                          android: AndroidSounds.notification,
+                          ios: IosSounds.glass,
+                          looping: false, // Android only - API >= 28
+                          volume: 0.1, // Android only - API >= 28
+                          asAlarm: false, // Android only - all APIs
+                        );
+                      },
+                      icon: const Icon(Icons.notifications_active_outlined)),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.all(0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      border:
+                          Border.all(width: 1, color: Colors.grey.shade300)),
+                  child: IconButton(
+                      onPressed: () {
+                        HapticFeedback.vibrate();
+                      },
+                      icon: const Icon(Icons.vibration_outlined)),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.all(0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      border:
+                          Border.all(width: 1, color: Colors.grey.shade300)),
+                  child: IconButton(
+                      onPressed: () {
+                        HapticFeedback.heavyImpact();
+                      },
+                      icon: const Icon(Icons.edgesensor_low_outlined)),
+                )
+              ],
+            ),
             OutlinedButton(
               style: ButtonStyle(
                   foregroundColor:

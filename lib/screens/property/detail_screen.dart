@@ -90,21 +90,22 @@ class _DetailPropertyScreenState extends State<DetailPropertyScreen> {
                         color: Colors.white,
                       ),
                       onTap: () {
-                        if (widget.property['des'] == 'home') {
-                          Navigator.of(context).push(new PageRouteBuilder(
+                        if (widget.property['des'] == 'home' ||
+                            widget.property['des'] == 'search-screen') {
+                          Navigator.of(context).push(PageRouteBuilder(
                               opaque: true,
                               transitionDuration:
                                   const Duration(milliseconds: 200),
                               pageBuilder: (BuildContext context, _, __) {
-                                return new HomeScreen();
+                                return HomeScreen();
                               },
                               transitionsBuilder: (_,
                                   Animation<double> animation,
                                   __,
                                   Widget child) {
-                                return new SlideTransition(
+                                return SlideTransition(
                                   child: child,
-                                  position: new Tween<Offset>(
+                                  position: Tween<Offset>(
                                     begin: const Offset(-2.0, 0),
                                     end: Offset.zero,
                                   ).animate(animation),
@@ -142,12 +143,15 @@ class _DetailPropertyScreenState extends State<DetailPropertyScreen> {
                                   color: Colors.white,
                                 ),
                           onTap: () async {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: !liked
-                                  ? Text("Adding to wishlists")
-                                  : Text("Removing from wishlists"),
-                              duration: Duration(seconds: 1),
-                            ));
+                            liked
+                                ? ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                    content: !liked
+                                        ? Text("Adding to wishlists")
+                                        : Text("Removing from wishlists"),
+                                    duration: Duration(seconds: 1),
+                                  ))
+                                : null;
                             liked
                                 ? await db.removeLikeFromProperty(
                                     user.uid, propertyId)

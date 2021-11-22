@@ -540,20 +540,20 @@ class _SearchScreenState extends State<SearchScreen> {
                       prefixIcon: IconButton(
                         onPressed: () {
                           HapticFeedback.heavyImpact();
-                          Navigator.of(context).push(new PageRouteBuilder(
+                          Navigator.of(context).push(PageRouteBuilder(
                               opaque: true,
                               transitionDuration:
                                   const Duration(milliseconds: 200),
                               pageBuilder: (BuildContext context, _, __) {
-                                return new HomeScreen();
+                                return HomeScreen();
                               },
                               transitionsBuilder: (_,
                                   Animation<double> animation,
                                   __,
                                   Widget child) {
-                                return new SlideTransition(
+                                return SlideTransition(
                                   child: child,
-                                  position: new Tween<Offset>(
+                                  position: Tween<Offset>(
                                     begin: const Offset(-2.0, 0),
                                     end: Offset.zero,
                                   ).animate(animation),

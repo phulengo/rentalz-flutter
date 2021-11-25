@@ -438,71 +438,73 @@ class _SearchScreenState extends State<SearchScreen> {
                                         Positioned(
                                           right: -12,
                                           top: -12,
-                                          child: FutureBuilder(
-                                              future: db.checkUserLike(
-                                                user!.uid,
-                                                propertyId
-                                                    .docs[index].reference.id,
-                                              ),
-                                              builder: (context,
-                                                  AsyncSnapshot snapshot) {
-                                                if (snapshot.connectionState !=
-                                                    ConnectionState.waiting) {
-                                                  liked =
-                                                      snapshot.data.isNotEmpty;
-                                                  return IconButton(
-                                                    icon: liked
-                                                        ? const Icon(Icons
-                                                            .favorite_outlined)
-                                                        : const Icon(Icons
-                                                            .favorite_outline_outlined),
-                                                    color: liked
-                                                        ? Colors.red
-                                                        : Colors.grey,
-                                                    onPressed: () async {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                        content: !liked
-                                                            ? Text(
-                                                                "Adding to wishlists")
-                                                            : Text(
-                                                                "Removing from wishlists"),
-                                                        duration: Duration(
-                                                            seconds: 1),
-                                                      ));
+                                          child: user != null
+                                              ? FutureBuilder(
+                                                  future: db.checkUserLike(
+                                                    user!.uid,
+                                                    propertyId.docs[index]
+                                                        .reference.id,
+                                                  ),
+                                                  builder: (context,
+                                                      AsyncSnapshot snapshot) {
+                                                    if (snapshot
+                                                            .connectionState !=
+                                                        ConnectionState
+                                                            .waiting) {
+                                                      liked = snapshot
+                                                          .data.isNotEmpty;
+                                                      return IconButton(
+                                                        icon: liked
+                                                            ? const Icon(Icons
+                                                                .favorite_outlined)
+                                                            : const Icon(Icons
+                                                                .favorite_outline_outlined),
+                                                        color: liked
+                                                            ? Colors.red
+                                                            : Colors.grey,
+                                                        onPressed: () async {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                                  SnackBar(
+                                                            content: !liked
+                                                                ? Text(
+                                                                    "Adding to wishlists")
+                                                                : Text(
+                                                                    "Removing from wishlists"),
+                                                            duration: Duration(
+                                                                seconds: 1),
+                                                          ));
 
-                                                      liked
-                                                          ? await db
-                                                              .removeLikeFromProperty(
+                                                          liked
+                                                              ? await db.removeLikeFromProperty(
                                                                   user.uid,
                                                                   propertyId
                                                                       .docs[
                                                                           index]
                                                                       .reference
                                                                       .id)
-                                                          : await db
-                                                              .addLikeToProperty(
+                                                              : await db.addLikeToProperty(
                                                                   user.uid,
                                                                   propertyId
                                                                       .docs[
                                                                           index]
                                                                       .reference
                                                                       .id);
-                                                      setState(() {
-                                                        liked = !liked;
-                                                      });
-                                                    },
-                                                  );
-                                                } else {
-                                                  return const Center(
-                                                    child:
-                                                        CircularProgressIndicator
-                                                            .adaptive(),
-                                                  );
-                                                }
-                                              }),
+                                                          setState(() {
+                                                            liked = !liked;
+                                                          });
+                                                        },
+                                                      );
+                                                    } else {
+                                                      return const Center(
+                                                        child:
+                                                            CircularProgressIndicator
+                                                                .adaptive(),
+                                                      );
+                                                    }
+                                                  })
+                                              : Container(),
                                         ),
                                       ]),
                                     ),
